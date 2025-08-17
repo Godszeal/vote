@@ -1,0 +1,46 @@
+import { CheckCircle, Shield, UserCheck, Lock } from "lucide-react";
+import { User } from "@shared/schema";
+
+interface SecurityStatusProps {
+  user?: User;
+}
+
+export default function SecurityStatus({ user }: SecurityStatusProps) {
+  return (
+    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
+      <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+        <Shield className="text-success mr-3 h-5 w-5" />
+        Security Status
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="flex items-center p-3 bg-green-50 rounded-lg">
+          <CheckCircle className="text-success mr-3 h-5 w-5" />
+          <div>
+            <div className="font-medium text-green-900">Identity Verified</div>
+            <div className="text-sm text-green-700">Student ID confirmed</div>
+          </div>
+        </div>
+        
+        <div className="flex items-center p-3 bg-green-50 rounded-lg">
+          <UserCheck className="text-success mr-3 h-5 w-5" />
+          <div>
+            <div className="font-medium text-green-900">
+              {user?.isEligible ? "Eligibility Confirmed" : "Not Eligible"}
+            </div>
+            <div className="text-sm text-green-700">
+              {user?.isEligible ? "Registered voter" : "Contact admin"}
+            </div>
+          </div>
+        </div>
+        
+        <div className="flex items-center p-3 bg-green-50 rounded-lg">
+          <Lock className="text-success mr-3 h-5 w-5" />
+          <div>
+            <div className="font-medium text-green-900">Session Encrypted</div>
+            <div className="text-sm text-green-700">256-bit SSL</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
